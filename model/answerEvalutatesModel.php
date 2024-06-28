@@ -37,10 +37,9 @@ class answerEvaluate extends BaseModel
             }
 
             $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
 
-            return $result;
+            return true;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
@@ -48,7 +47,7 @@ class answerEvaluate extends BaseModel
 
     public function insert($answerId, $userId, $rate)
     {
-        $sql = "INSERT INTO `" . self::table . "` (`AnswerID`, `UserID`, `RateCategory`, `CreatedDate`) VALUES ($answerId, $userId, '$rate', NOW())"; 
+        $sql = "INSERT INTO `" . self::table . "` (`AnswerID`, `UserID  `, `RateCategory`, `CreatedDate`) VALUES ($answerId, $userId, $rate, NOW())"; 
         try {
             $stmt = $this->connection->prepare($sql);
             if ($stmt === false) {

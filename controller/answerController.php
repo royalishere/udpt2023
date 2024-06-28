@@ -1,23 +1,22 @@
 <?php
 
-require_once __DIR__ ."/../model/answerModel.php";
-require_once __DIR__ ."/../model/questionModel.php";
-require_once __DIR__ ."/../model/answerEvalutatesModel.php";
+require_once __DIR__ . "/../model/answerModel.php";
+require_once __DIR__ . "/../model/questionModel.php";
+require_once __DIR__ . "/../model/answerEvalutatesModel.php";
 
 class answerController
 {
     public function createAnswer($answer, $questionId, $userId)
     {
-        $a = new answer;
-        $result = $a->insert($questionId, $answer, $userId);
+        $answer = new answer;
+        $result = $answer->insert($questionId, $answer, $userId);
 
         $q = new question();
         $result2 = $q->updateNumberAnsweres($questionId);
 
         if ($result && $result2) {
             return "Create answer success";
-        }
-        else {
+        } else {
             return "Create answer failed";
         }
     }
@@ -32,8 +31,7 @@ class answerController
 
         if ($result && $result2) {
             return "Evaluate answer success";
-        }
-        else {
+        } else {
             return "Evaluate answer failed";
         }
     }
@@ -43,11 +41,9 @@ class answerController
         $answer = new answer();
         $result = $answer->selectByQuestion($questionId);
 
-        if ($result)
-        {
+        if ($result) {
             return $result;
-        }
-        else {
+        } else {
             return "unsuccess";
         }
     }
@@ -57,37 +53,18 @@ class answerController
         $answer = new answer();
         $result = $answer->select();
 
-        if ($result)
-        {
+        if ($result) {
             return $result;
-        }
-        else {
-            return "unsuccess";
-        }
-    }
-
-    public function getAllEvaluate()
-    {
-        $answerEvaluate = new answerEvaluate();
-        $result = $answerEvaluate->select();
-
-        if ($result)
-        {
-            return $result;
-        }
-        else {
+        } else {
             return "unsuccess";
         }
     }
 
     public function updateAnswer($answerId, $answer)
     {
-
     }
 
     public function deleteAnswer($answer)
     {
-        
     }
-
 }

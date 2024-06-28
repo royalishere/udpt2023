@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ ."/../model/answerModel.php";
-require_once __DIR__ ."/../model/questionModel.php";
-require_once __DIR__ ."/../model/answerEvalutatesModel.php";
+require_once __DIR__ . "/../model/answerModel.php";
+require_once __DIR__ . "/../model/questionModel.php";
+require_once __DIR__ . "/../model/answerEvalutatesModel.php";
 
 class questionController
 {
@@ -12,12 +12,9 @@ class questionController
 
         $result = $q->insert($question, $userId, $tag);
 
-        if ($result)
-        {
+        if ($result) {
             return "insert success";
-        }
-        else
-        {
+        } else {
             return "fail to insert";
         }
     }
@@ -28,12 +25,9 @@ class questionController
 
         $result = $q->select($question, $userId, $tag);
 
-        if ($result)
-        {
+        if ($result) {
             return $result;
-        }
-        else
-        {
+        } else {
             return "fail to find";
         }
     }

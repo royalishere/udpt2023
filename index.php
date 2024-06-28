@@ -6,12 +6,38 @@ if (session_id() === '') {
 
 require_once __DIR__ . '/controller/userController.php';
 require_once __DIR__ . '/controller/questionController.php';
-require_once __DIR__ . '/controller/answerController.php';
 
-$controller = new userController;
-$str = $controller->login("user1", "password1");
+try {
+    $action = "";
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
+    }
 
-echo "<pre>";
+    switch ($action) {
+        case "home":
+            $controller = new userController();
+            $username = $password = null;
+            if (isset($_POST['submit'])) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $controller->login($username, $password);
+            } else {
+                $controller->index();
+            }
+            break;
+        
+        case "logout":
+            $controller = new userController();
+            $controller->logout();
+            break;
 
-$a = new answerController;
-print_r($a->getAllEvaluate());
+        default:
+            $controller = new userController();
+            $controller->index();
+            break;
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+
+//print_r($_SESSION['user']['userId']);
