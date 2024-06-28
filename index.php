@@ -14,4 +14,4 @@ $str = $controller->login("user1", "password1");
 echo "<pre>";
 
 $a = new answerController;
-echo $a->answerEvaluate(1, "5STAR", 1) . "\n";
+print_r($a->getAllEvaluate());

@@ -66,6 +66,20 @@ class answerController
         }
     }
 
+    public function getAllEvaluate()
+    {
+        $answerEvaluate = new answerEvaluate();
+        $result = $answerEvaluate->select();
+
+        if ($result)
+        {
+            return $result;
+        }
+        else {
+            return "unsuccess";
+        }
+    }
+
     public function updateAnswer($answerId, $answer)
     {
 

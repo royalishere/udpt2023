@@ -37,9 +37,10 @@ class answerEvaluate extends BaseModel
             }
 
             $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
 
-            return true;
+            return $result;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
