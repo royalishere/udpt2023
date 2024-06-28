@@ -6,15 +6,12 @@ if (session_id() === '') {
 
 require_once __DIR__ . '/controller/userController.php';
 require_once __DIR__ . '/controller/questionController.php';
+require_once __DIR__ . '/controller/answerController.php';
 
 $controller = new userController;
 $str = $controller->login("user1", "password1");
 
-$q = new questionController;
-print_r($q->createQuestion("question1", $_SESSION["user"]["userId"], "tag1"));
+echo "<pre>";
 
-$controller->logout();
-
-//print_r($str);
-
-//print_r($_SESSION['user']['userId']);
+$a = new answerController;
+echo $a->answerEvaluate(1, "5STAR", 1) . "\n";

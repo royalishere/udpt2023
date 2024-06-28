@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ ."./../model/answerModel.php";
-require_once __DIR__ ."./../model/questionModel.php";
-require_once __DIR__ ."./../model/answerEvalutatesModel.php";
+require_once __DIR__ ."/../model/answerModel.php";
+require_once __DIR__ ."/../model/questionModel.php";
+require_once __DIR__ ."/../model/answerEvalutatesModel.php";
 
 class questionController
 {

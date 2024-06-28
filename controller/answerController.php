@@ -1,15 +1,15 @@
 <?php
 
-require_once __DIR__ ."./../model/answerModel.php";
-require_once __DIR__ ."./../model/questionModel.php";
-require_once __DIR__ ."./../model/answerEvalutatesModel.php";
+require_once __DIR__ ."/../model/answerModel.php";
+require_once __DIR__ ."/../model/questionModel.php";
+require_once __DIR__ ."/../model/answerEvalutatesModel.php";
 
 class answerController
 {
     public function createAnswer($answer, $questionId, $userId)
     {
-        $answer = new answer;
-        $result = $answer->insert($questionId, $answer, $userId);
+        $a = new answer;
+        $result = $a->insert($questionId, $answer, $userId);
 
         $q = new question();
         $result2 = $q->updateNumberAnsweres($questionId);

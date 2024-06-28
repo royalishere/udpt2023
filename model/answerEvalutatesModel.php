@@ -47,7 +47,7 @@ class answerEvaluate extends BaseModel
 
     public function insert($answerId, $userId, $rate)
     {
-        $sql = "INSERT INTO `" . self::table . "` (`AnswerID`, `UserID  `, `RateCategory`, `CreatedDate`) VALUES ($answerId, $userId, $rate, NOW())"; 
+        $sql = "INSERT INTO `" . self::table . "` (`AnswerID`, `UserID`, `RateCategory`, `CreatedDate`) VALUES ($answerId, $userId, '$rate', NOW())"; 
         try {
             $stmt = $this->connection->prepare($sql);
             if ($stmt === false) {

@@ -70,6 +70,7 @@ class answer extends BaseModel
     public function updateNumberEvaluates($answerId)
     {
         $query = "UPDATE `".self::table."` SET `NumberEvaluaters` = `NumberEvaluaters` + 1 WHERE `AnswerID` = $answerId";
+        print_r($query);
 
         try {
             $stmt = $this->connection->prepare($query);
@@ -78,10 +79,9 @@ class answer extends BaseModel
             }
 
             $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
 
-            return $result;
+            return true;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
