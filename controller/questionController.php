@@ -31,4 +31,19 @@ class questionController
             return "fail to find";
         }
     }
+
+    public function getALlQuestion()
+    {
+        $q = new question();
+
+        $questions = $q->selectAll();
+
+        if ($questions) {
+            $title = "Question List";
+            $view = __DIR__ . '/../view/questionList.php';
+            require __DIR__ . '/../view/main.php';
+        } else {
+            return "fail to find";
+        }
+    }
 }

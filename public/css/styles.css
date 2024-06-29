@@ -1,1 +1,13 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
 
+.db-card {
+    transition: transform 0.2s;
+}
+
+.db-card:hover {
+    transform: scale(1.05);
+}

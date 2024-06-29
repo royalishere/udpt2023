@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ .'/baseModel.php';
+require_once __DIR__ . '/baseModel.php';
 
 class user extends BaseModel
 {
@@ -8,7 +8,7 @@ class user extends BaseModel
 
     public function login($username, $password)
     {
-        $query = "SELECT * FROM `". self::TABLE ."` WHERE `UserName`= '$username' AND `Password`= '$password'  LIMIT 1;";
+        $query = "SELECT * FROM `" . self::TABLE . "` WHERE `UserName`= '$username' AND `Password`= '$password'  LIMIT 1;";
         try {
             $stmt = $this->connection->prepare($query);
             if ($stmt === false) {
@@ -20,7 +20,6 @@ class user extends BaseModel
             $stmt->close();
 
             return $result;
-            
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
@@ -28,22 +27,19 @@ class user extends BaseModel
 
     public function select()
     {
-
     }
 
     public function insert()
     {
-
     }
 
     public function delete()
     {
-
     }
 
     public function update($userId, $role)
     {
-        $query = "UPDATE `". self::TABLE ."` SET `Role` = '$role' WHERE `UserId` = $userId";
+        $query = "UPDATE `" . self::TABLE . "` SET `Role` = '$role' WHERE `UserID` = $userId";
         try {
             $stmt = $this->connection->prepare($query);
             if ($stmt === false) {

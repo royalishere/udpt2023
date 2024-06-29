@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ .('/baseModel.php');
+require_once __DIR__ . ('/baseModel.php');
 
 class question extends BaseModel
 {
@@ -9,7 +9,7 @@ class question extends BaseModel
     public function select($question, $userId = -1, $tag)
     {
         $query = "SELECT * FROM `" . self::TABLE . "` WHERE `Question` LIKE '%$question%' AND `Tags` LIKE '%$tag%'";
-        
+
         if ($userId != -1) {
             $query .= " AND `UserID` = $userId";
         }
@@ -50,7 +50,6 @@ class question extends BaseModel
 
     public function delete()
     {
-
     }
 
     public function updateNumberAnsweres($questionId)
@@ -71,4 +70,41 @@ class question extends BaseModel
         }
     }
 
+    public function selectAll()
+    {
+        $query = "SELECT q.QuestionID, q.Question, u.UserName, q.Tags, q.CreatedDate, q.NumberAnswerers from `" . self::TABLE . "` q JOIN users u ON q.UserID = u.UserID";
+        try {
+            $stmt = $this->connection->prepare($query);
+            if ($stmt === false) {
+                throw new Exception("Unable to do prepared statement: " . $query);
+            }
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function selectById($questionId)
+    {
+        $query = "SELECT * FROM `" . self::TABLE . "` WHERE `QuestionID` = $questionId";
+        try {
+            $stmt = $this->connection->prepare($query);
+            if ($stmt === false) {
+                throw new Exception("Unable to do prepared statement: " . $query);
+            }
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 }

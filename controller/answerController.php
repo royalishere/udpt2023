@@ -6,16 +6,15 @@ require_once __DIR__ . "/../model/answerEvalutatesModel.php";
 
 class answerController
 {
-    public function createAnswer($answer, $questionId, $userId)
+    public function createAnswer($answer, $questionId, $userId, $reference)
     {
-        $answer = new answer;
-        $result = $answer->insert($questionId, $answer, $userId);
-
+        $answer_model = new answer;
+        $result = $answer_model->insert($questionId, $answer, $userId, $reference);
         $q = new question();
         $result2 = $q->updateNumberAnsweres($questionId);
-
         if ($result && $result2) {
-            return "Create answer success";
+            // navigate to question detail page
+            header("Location: index.php?action=list&type=answer&questionId=$questionId");
         } else {
             return "Create answer failed";
         }
@@ -39,12 +38,16 @@ class answerController
     public function getQuestionAnswer($questionId)
     {
         $answer = new answer();
-        $result = $answer->selectByQuestion($questionId);
-
-        if ($result) {
-            return $result;
+        $answers = $answer->selectByQuestion($questionId);
+        $question_row = new question();
+        $question_row = $question_row->selectById($questionId)[0];
+        $question = $question_row['Question'];
+        if ($answers && $question) {
+            $title = "Answer List";
+            $view = __DIR__ . '/../view/answerList.php';
+            require __DIR__ . '/../view/main.php';
         } else {
-            return "unsuccess";
+            return "fail to find";
         }
     }
 

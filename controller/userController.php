@@ -10,12 +10,9 @@ class userController
     {
         $title = "Home Page";
         if (isset($_SESSION['user'])) {
-            $header = __DIR__ . '/../view/header.php';
             $view = __DIR__ . '/../view/home.php';
             require __DIR__ . '/../view/main.php';
-        }
-        else
-        {
+        } else {
             $this->login(null, null);
         }
     }
@@ -34,7 +31,10 @@ class userController
                 $_SESSION['user']['role'] = $result[0]['Role'];
                 $this->index();
             } else {
-                return "Login failed";
+                $error = "Login failed!";
+                $title = "Login";
+                $message = "Username or password is incorrect!";
+                require __DIR__ . '/../view/login.php';
             }
         }
     }
@@ -52,5 +52,16 @@ class userController
 
     public function changeRole($role, $userId)
     {
+        $result = false;
+        if ($role != null) {
+            $user = new user();
+            $result = $user->update($userId, $role);
+        }
+        if ($result) {
+            $_SESSION['user']['role'] = $role;
+        }
+        $title = "Change Role";
+        $view = __DIR__ . '/../view/changeRole.php';
+        require __DIR__ . '/../view/main.php';
     }
 }
